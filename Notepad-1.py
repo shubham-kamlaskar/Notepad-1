@@ -2,7 +2,21 @@ from tkinter import *
 from tkinter import messagebox
 root = Tk()
 root.title("Notepad-1")
-root.geometry("300x300")
+
+root.resizable(False,False)
+
+def save1():
+    L1.config(text=my_text.get(1.0,END))
+
+    '''
+    a = (my_text.get(1.0,END))
+    print(a)
+    '''
+
+def clear():
+    my_text.delete(1.0,END)
+
+
 menubar = Menu(root)
 root.config(menu=menubar)
 file = Menu(menubar)
@@ -44,6 +58,19 @@ menubar.add_cascade(menu=hel,label="Help")
 hel.add_command(label="View Help")
 hel.add_command(label="About Notepad")
 
-T1 = Text(root,wrap="word").pack()
+
+
+my_text = Text(root,width=60,height=20,font=("Calibri",12))
+my_text.grid(row=0,column=0,columnspan=2)
+
+button_frame = Frame(root)
+button_frame.grid(row=1,column=0,columnspan=2)
+
+B1 = Button(button_frame,text="Close",command=clear)
+B1.grid(row=0,column=0,columnspan=1)
+B2 = Button(button_frame,text="Save",command=save1)
+B2.grid(row=0,column=1,columnspan=1)
+L1 = Label(root,text="")
+L1.grid(row=2,column=0,columnspan=2)
 
 root.mainloop()
