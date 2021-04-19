@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import filedialog as fd
+
 root = Tk()
 root.title("Notepad-1")
 
@@ -15,6 +17,10 @@ def save1():
 
 def clear():
     my_text.delete(1.0,END)
+    L1.config(text="")
+
+def OpenFile():
+    text_file = fd.askopenfilename()
 
 
 menubar = Menu(root)
@@ -60,7 +66,7 @@ hel.add_command(label="About Notepad")
 
 
 
-my_text = Text(root,width=60,height=20,font=("Calibri",12))
+my_text = Text(root,width=60,height=20,font=("Calibri",12),undo=True)
 my_text.grid(row=0,column=0,columnspan=2)
 
 button_frame = Frame(root)
@@ -71,6 +77,12 @@ B1.grid(row=0,column=0,columnspan=1)
 B2 = Button(button_frame,text="Save",command=save1)
 B2.grid(row=0,column=1,columnspan=1)
 L1 = Label(root,text="")
-L1.grid(row=2,column=0,columnspan=2)
+L1.grid(row=4,column=0,columnspan=2)
+B3 = Button(button_frame,text="Redo",command=my_text.edit_redo)
+B3.grid(row=1,column=1)
+B3 = Button(button_frame,text="Undo",command=my_text.edit_undo)
+B3.grid(row=1,column=0)
 
+B4 = Button(button_frame,text="Open file",command=OpenFile)
+B4.grid(row=0,column=3)
 root.mainloop()
